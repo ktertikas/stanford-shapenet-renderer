@@ -107,6 +107,9 @@ if args.edge_split:
     context.object.modifiers["EdgeSplit"].split_angle = 1.32645
     bpy.ops.object.modifier_apply(modifier="EdgeSplit")
 
+# disabling auto smoothing
+obj.data.use_auto_smooth = False
+
 # Set objekt IDs
 obj.pass_index = 1
 
@@ -116,16 +119,34 @@ light.type = 'SUN'
 light.use_shadow = False
 # Possibly disable specular shading:
 light.specular_factor = 1.0
-light.energy = 10.0
+light.energy = 1.0
 
-# Add another light source so stuff facing away from light is not completely dark
+# # Add another light source so stuff facing away from light is not completely dark
 bpy.ops.object.light_add(type='SUN')
 light2 = bpy.data.lights['Sun']
 light2.use_shadow = False
 light2.specular_factor = 1.0
-light2.energy = 0.015
+light2.energy = 1.
 bpy.data.objects['Sun'].rotation_euler = bpy.data.objects['Light'].rotation_euler
-bpy.data.objects['Sun'].rotation_euler[0] += 180
+bpy.data.objects['Sun'].rotation_euler[0] += 90
+
+# # Add another light source so stuff facing away from light is not completely dark
+bpy.ops.object.light_add(type='SUN')
+light3 = bpy.data.lights['Sun.001']
+light3.use_shadow = False
+light3.specular_factor = 1.0
+light3.energy = 1.
+bpy.data.objects['Sun.001'].rotation_euler = bpy.data.objects['Light'].rotation_euler
+bpy.data.objects['Sun.001'].rotation_euler[0] += 180
+
+bpy.ops.object.light_add(type='SUN')
+light4 = bpy.data.lights['Sun.002']
+light4.use_shadow = False
+light4.specular_factor = 1.0
+light4.energy = 1.
+bpy.data.objects['Sun.002'].rotation_euler = bpy.data.objects['Light'].rotation_euler
+bpy.data.objects['Sun.002'].rotation_euler[0] += 270
+
 
 # Place camera
 cam = scene.objects['Camera']
