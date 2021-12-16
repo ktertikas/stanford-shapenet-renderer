@@ -86,6 +86,10 @@ bpy.ops.import_scene.obj(filepath=args.obj)
 obj = bpy.context.selected_objects[0]
 context.view_layer.objects.active = obj
 
+# centering the bounding box
+bpy.ops.object.origin_set(type="ORIGIN_GEOMETRY", center="BOUNDS")
+obj.location = (0.0, 0.0, 0.0)  # center the bounding box!
+
 # Possibly disable specular shading
 for slot in obj.material_slots:
     node = slot.material.node_tree.nodes['Principled BSDF']
